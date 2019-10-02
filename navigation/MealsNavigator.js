@@ -40,7 +40,8 @@ const FilterNavigator = createStackNavigator({
     defaultNavigationOptions : {
         headerStyle : {backgroundColor : Colors.primary},
         headerTintColor : Colors.secondary,
-        headerTitle : 'Filter Meals'
+        headerTitle : 'Filter Meals',
+        headerTitleStyle : {fontFamily : 'roboto-medium', fontWeight : undefined}
     }
 })
 

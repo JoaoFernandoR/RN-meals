@@ -1,8 +1,8 @@
 import React from 'react';
+import { FlatList } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/HeaderButton'
-import { FlatList } from 'react-native'
-import {CATEGORIES} from '../data/dummy-data'
+import { CATEGORIES } from '../data/dummy-data'
 import ListItem from '../components/ListItem'
 import Colors from '../constants/Colors'
 

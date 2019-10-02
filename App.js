@@ -2,12 +2,21 @@ import React, {useState} from 'react';
 import MealsNavigator from './navigation/MealsNavigator'
 import {AppLoading} from 'expo'
 import * as Font from 'expo-font'
-import {useScreens} from 'react-native-screens'
+import { useScreens } from 'react-native-screens'
+import { createStore, combineReducers } from 'redux'
+import mealsReducer from './store/reducers/meals'
+import { Provider } from 'react-redux'
 
 // chamar essa função para melhorar a performance do nosso aplicativo
 useScreens()
 
-// Teste para mandar para o git
+// Aqui não precisariamos usar o combineReducers porque usaremos apenas um, mas sempre será utilizado
+// temos um reducer principal, um root reducer.
+const rootReducer = combineReducers({
+  meals : mealsReducer
+})
+
+const store = createStore(rootReducer)
 
 const loadFonts = () => {
   return Font.loadAsync({
@@ -31,7 +40,9 @@ export default function App() {
   }
 
   return (
-    <MealsNavigator />
+    // Necessário para utilizar o store, as propriedades do redux em toda nossa aplicação.
+    <Provider store={store}>
+      <MealsNavigator />
+    </Provider>
   );
 }
-

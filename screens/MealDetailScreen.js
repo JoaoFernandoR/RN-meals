@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Text, View, Dimensions, StyleSheet, Image, ScrollView } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/HeaderButton'
+import { toggleFavorite } from '../store/actions/meals'
 
-const {width} = Dimensions.get('window')
 
-export default CategoriesScreen = (props) => {
+const { width } = Dimensions.get('window')
 
+export default MealDetailScreen = (props) => {
 
     const {navigation} = props
     const data = navigation.getParam('data')
@@ -24,6 +26,17 @@ export default CategoriesScreen = (props) => {
     isVegetarian ,
     isLactoseFree} = data
 
+
+    // função executada que será guardada em uma variável
+    const dispatch = useDispatch()
+
+    const toggleFavoriteHandler  = useCallback(() => {
+        dispatch(toggleFavorite(id))
+    }, [dispatch, id])
+
+    useEffect(() => {
+        props.navigation.setParams({toggleFav : toggleFavoriteHandler})
+    }, [toggleFavoriteHandler])
 
     return (
         <ScrollView>
@@ -45,6 +58,10 @@ export default CategoriesScreen = (props) => {
                 <View style={estilos.textView} key={index}>
                     <Text>{item}</Text>
                     </View> 
+                )}
+                <Text style={{fontSize : 20, textAlign : 'center', marginVertical : 10, fontFamily : 'chilanka-regular'}}> Steps </Text>
+                {steps.map((item, index) => 
+                    <Text style={{textAlign : 'center', fontFamily : 'roboto-thin'}} key={index}>{item}</Text>
                 )}
             </View>
         </ScrollView>
@@ -87,7 +104,7 @@ const estilos = StyleSheet.create({
     }
 })
 
-CategoriesScreen.navigationOptions = (navigationData) => {
+MealDetailScreen.navigationOptions = (navigationData) => {
 
     const data = navigationData.navigation.getParam('data')
     const MyTitle = data.title
@@ -95,7 +112,7 @@ CategoriesScreen.navigationOptions = (navigationData) => {
     return {
         headerTitle : MyTitle,
         headerRight : <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item title='Favorite' iconName='ios-star' onPress={() => console.log('mark as favorite')}/>
+            <Item title='Favorite' iconName='ios-star' onPress={toggleFavorite}/>
         </HeaderButtons>
     }
 
