@@ -7,7 +7,7 @@ import {useScreens} from 'react-native-screens'
 // chamar essa função para melhorar a performance do nosso aplicativo
 useScreens()
 
-
+// Teste para mandar para o git
 
 const loadFonts = () => {
   return Font.loadAsync({
