@@ -1,7 +1,10 @@
 import React from 'react';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import CustomHeaderButton from '../components/HeaderButton'
 import { FlatList } from 'react-native'
 import {CATEGORIES} from '../data/dummy-data'
 import ListItem from '../components/ListItem'
+import Colors from '../constants/Colors'
 
 export default CategoriesScreen = (props) => {
 
@@ -15,5 +18,17 @@ export default CategoriesScreen = (props) => {
         keyExtractor={item => item.id}
         />
     )
+}
+
+CategoriesScreen.navigationOptions = (navData) => {
+    return {
+    headerTitle : 'Meals Categories',
+    headerTitleStyle : {
+        color : Colors.secondary,
+    },
+    headerLeft : <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title='Menu' iconName='ios-menu' onPress={() => navData.navigation.toggleDrawer()}/>
+        </HeaderButtons>
+    }    
 }
 

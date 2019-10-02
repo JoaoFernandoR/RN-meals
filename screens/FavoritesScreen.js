@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, View, FlatList } from 'react-native'
 import { MEALS } from '../data/dummy-data'
 import CatItem from '../components/CatItem'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import CustomHeaderButton from '../components/HeaderButton'
 
 export default FavoritesScreen = props => {
 
@@ -19,6 +21,11 @@ const meals = MEALS.filter((item) => item.id === 'm2' )
     )
 }
 
-FavoritesScreen.navigationOptions = {
-    headerTitle : 'Your Favorites'
+FavoritesScreen.navigationOptions = (navData) => {
+    return {
+    headerTitle : 'Your Favorites',
+    headerLeft : <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title='Menu' iconName='ios-menu' onPress={() => navData.navigation.toggleDrawer()}/>
+        </HeaderButtons>
+    }        
 }

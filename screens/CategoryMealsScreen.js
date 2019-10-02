@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList } from 'react-native'
+import { View, FlatList, ScrollView } from 'react-native'
 import { CATEGORIES, MEALS } from '../data/dummy-data'
 import CatItem from '../components/CatItem'
 
@@ -13,6 +13,7 @@ export default CategoryMeals = (props) => {
     const meals = MEALS.filter(item => item.categoryIds.includes(ID))
     
     return (
+    <ScrollView>
         <View style={{flex : 1, justifyContent : 'center', alignItems: 'center', margin : 15}}>
             <FlatList 
                 data={meals}
@@ -20,6 +21,7 @@ export default CategoryMeals = (props) => {
                 keyExtractor={item => item.id}
             />
         </View>
+    </ScrollView>
     )
     
     

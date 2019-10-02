@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, Button, Dimensions, StyleSheet, Image } from 'react-native'
-import { HeaderButtons, Item, HeaderButton } from 'react-navigation-header-buttons'
+import { Text, View, Dimensions, StyleSheet, Image, ScrollView } from 'react-native'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/HeaderButton'
 
 const {width} = Dimensions.get('window')
@@ -26,21 +26,28 @@ export default CategoriesScreen = (props) => {
 
 
     return (
-        <View style={estilos.firstView}>
-            <Text style={{fontSize : 20, textAlign : 'center', marginVertical : 10, fontFamily : 'chilanka-regular'}}> {title.toUpperCase()}</Text>
-            <View style={estilos.imgContainer}>
-                <Image source ={{uri : imageUrl}} style={estilos.img}/>
+        <ScrollView>
+            <View style={estilos.firstView}>
+                <Text style={{fontSize : 20, textAlign : 'center', marginVertical : 10, fontFamily : 'chilanka-regular'}}> {title.toUpperCase()}</Text>
+                <View style={estilos.imgContainer}>
+                    <Image source ={{uri : imageUrl}} style={estilos.img}/>
+                </View>
+                <View style={estilos.textView}>
+                    <Text>
+                        Recipe Duration : {duration} minutes
+                    </Text>
+                </View>
+                <View style={estilos.textView}>
+                    {(isVegan) ? <Text>Vegan Recipe</Text> : <Text>Not a Vegan Recipe</Text> }
+                </View>
+                <Text style={{fontSize : 20, textAlign : 'center', marginVertical : 10, fontFamily : 'chilanka-regular'}}> Ingredients </Text>
+                {ingredients.map((item, index) => 
+                <View style={estilos.textView} key={index}>
+                    <Text>{item}</Text>
+                    </View> 
+                )}
             </View>
-            <View style={estilos.textView}>
-                <Text>
-                    Recipe Duration : {duration} minutes
-                </Text>
-            </View>
-            <View style={estilos.textView}>
-                {(isVegan) ? <Text>Vegan Recipe</Text> : <Text>Not a Vegan Recipe</Text> }
-            </View>
-            <Button title='Go to Start Screen' onPress={() => navigation.popToTop()}/>
-        </View>
+        </ScrollView>
     )
 }
 
