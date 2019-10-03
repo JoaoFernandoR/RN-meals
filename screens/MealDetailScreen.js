@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { Text, View, Dimensions, StyleSheet, Image, ScrollView } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import CustomHeaderButton from '../components/HeaderButton'
 import { toggleFavorite } from '../store/actions/meals'
@@ -26,6 +26,14 @@ export default MealDetailScreen = (props) => {
     isVegetarian ,
     isLactoseFree} = data
 
+    const availableMeals = useSelector(state => state.meals.meals)
+    const selectedMeal = availableMeals.find(meal => meal.id === id)
+
+    // Assim mandamos esse parâmetro novo para o nosso header, precisamos usar
+    // useEffect para não terminarmos em um loop infinito
+    // useEffect(() => {
+    //     navigation.setParams({mealTitle : selectedMeal.title})
+    // }, [selectedMeal])
 
     // função executada que será guardada em uma variável
     const dispatch = useDispatch()
@@ -107,12 +115,17 @@ const estilos = StyleSheet.create({
 MealDetailScreen.navigationOptions = (navigationData) => {
 
     const data = navigationData.navigation.getParam('data')
+    const toggleFav = navigationData.navigation.getParam('toggleFav')
     const MyTitle = data.title
+
+    // Aqui fiz para testar a propriedade de setParams, mas já tinha passado os dados como
+    // propriedade para meu header, então não precisaria fazer todo esse esquema
+    // const mealTitle = navigationData.navigation.getParam('mealTitle')
 
     return {
         headerTitle : MyTitle,
         headerRight : <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item title='Favorite' iconName='ios-star' onPress={toggleFavorite}/>
+            <Item title='Favorite' iconName='ios-star' onPress={toggleFav}/>
         </HeaderButtons>
     }
 

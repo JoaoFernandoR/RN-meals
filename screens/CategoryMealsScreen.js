@@ -15,6 +15,7 @@ export default CategoryMeals = props => {
 
     // useSelector aceita uma função, função que será executada pelo 'react-redux' para gente
     // meals é o identificador que usamos em combineReducers()
+    // state.meals porque temos o combinereducers, senão pegaríamos apenas o state
     const availableMeals = useSelector(state => state.meals.filteredMeals)
 
     // trocamos MEALS.filter por availableMeals.filter

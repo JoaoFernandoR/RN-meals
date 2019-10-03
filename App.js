@@ -3,9 +3,10 @@ import MealsNavigator from './navigation/MealsNavigator'
 import {AppLoading} from 'expo'
 import * as Font from 'expo-font'
 import { useScreens } from 'react-native-screens'
+// Importações necessárias para o Redux
 import { createStore, combineReducers } from 'redux'
-import mealsReducer from './store/reducers/meals'
 import { Provider } from 'react-redux'
+import mealsReducer from './store/reducers/meals'
 
 // chamar essa função para melhorar a performance do nosso aplicativo
 useScreens()

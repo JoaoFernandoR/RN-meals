@@ -11,12 +11,12 @@ export default FavoritesScreen = props => {
 
     const {navigate} = props.navigation
 
-    const availableMeals = useSelector(state => state.meals.favoriteMeals)
+    const favMeals = useSelector(state => state.meals.favoriteMeals)
 
     return (
     <View style={{flex : 1, justifyContent : 'center', alignItems: 'center', margin : 15}}>
         <FlatList 
-            data={availableMeals}
+            data={favMeals}
             renderItem={({item}) => <CatItem navigate={navigate} data={item} />}
             keyExtractor={item => item.id}
         />
